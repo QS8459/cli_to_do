@@ -4,7 +4,7 @@
 #![allow(unused_mut)]
 #![allow(unused_must_use)]
 
-use std::io::{stdin};
+use std::io::{stdin, stdout};
 // mod models;
 // use crate::models::todo::{ToDo, ToDoList};
 
@@ -63,12 +63,19 @@ impl ToDoList{
 
         match &self.items{
             Some(v) => {
-                if in_limit >= v.len(){
+                println!("Lenght of vector {:?}", v.len());
+
+                if offset <= 2 && v.len() <= 2{
+                    println!("{:?}", &v)    
+                }
+                else if in_limit >= v.len(){
                 println!("{:?}", &v[offset..])
                 }
+                
                 else{
                     println!("{:?}", &v[offset..in_limit])
                 }
+                
         },
             None => println!("No itmes")
         }
@@ -84,39 +91,44 @@ fn print_type_of<T>(_: &T) -> String{
 
 
 fn main() {
+    println!("
+    Welcom to To Do Menu
+    This application is for todo list
+    You may perfrom addition, read, edit and delete operations
+    ");
 
-    // let mut user_input = String::new();
-    // stdin().read_line(&mut user_input);
-    // println!("{:?}", user_input);
+    loop{
+        println!("
+        Etner:[1,2,3,4,5]
+        1> Read ToDo list
+        2> Add ToDo
+        3> Edit ToDo
+        4> Delete
+        5> Exit
+        ");
+        let mut user_input = String::new();
+        stdin().read_line(&mut user_input);
+        match &user_input[..1] {
+            "1" => {
+                println!("You entered {:?}", user_input);
+                
+            },
+            "2" => {
+                println!("You entered {:?}", user_input);
+            },
+            "3" => {
+                println!("You entered {:?}", user_input);
+            },  
+            "4" => {
+                println!("You entered {:?}", user_input);
+            },
+            "5" => {
+                println!("You entered {:?}", user_input);
+                break;
+            },
+            _ => continue,
+        }
+    }
 
-
-    let mut list: ToDoList = ToDoList{
-        items: Option::None
-    };
-
-    list.add(
-        "first",
-        "Desc"
-    );
-
-    
-    list.add(
-        "Second",
-        "Desc 2"
-    );
-
-    
-    // list.add(
-    //     "Third",
-    //     "3"
-    // );
-
-
-    list.display(1, 4);
 }
-    // let v = vec![1,2,3];
-
-    // println!("{:?}", &v[0..]);
-
-
 // }
