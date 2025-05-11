@@ -89,8 +89,46 @@ fn print_type_of<T>(_: &T) -> String{
     return type_name::<T>().to_string();
 }
 
+fn display_to_do(to_do_list: &ToDoList){
+    let mut user_input = String::new();
+    let mut step: usize = 0;
+    let limit: usize = 5;
+    loop{
+    
+        stdin().read_line(&mut user_input);
+
+        match &user_input[..1]{
+            ">" => {
+                println!("You entered {:?}", user_input);
+                let skip: usize = 1 as usize * step;
+                to_do_list.display(
+                    skip, limit
+                );
+                step += 1;
+                
+            },
+            "<" => {
+                println!("You entered {:?}", user_input);
+                let skip: usize = 1 as usize * step;
+                to_do_list.display(
+                    skip, limit
+                );
+                step -= 1;
+                
+            },
+            _ => 
+            {println!("No such option");
+            
+            }
+        }  
+        user_input = "".to_string();  
+        
+    }
+}
+
 
 fn main() {
+    let to_do_list: ToDoList = ToDoList{items: Option::None};
     println!("
     Welcom to To Do Menu
     This application is for todo list
@@ -110,8 +148,9 @@ fn main() {
         stdin().read_line(&mut user_input);
         match &user_input[..1] {
             "1" => {
-                println!("You entered {:?}", user_input);
-                
+                  display_to_do(
+                    &to_do_list
+                  );
             },
             "2" => {
                 println!("You entered {:?}", user_input);
